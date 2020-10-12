@@ -20,30 +20,6 @@ class App extends Component {
 		this.takeData();
 	}
 
-	sortFlights(a,b){
-		const nameA = a.mission_name.toLowerCase();
-		const nameB = b.mission_name.toLowerCase();
-
-		let comparison = 0;
-		if (nameA > nameB) {
-			comparison = 1;
-		} else if (nameA < nameB) {
-			comparison = -1;
-		}
-
-		return comparison;
-	}
-
-	sort() {
-		const myArr = [...this.state.data];
-		const filterArr = [...this.state.filteredData];
-		myArr.sort(this.sortFlights);
-		filterArr.sort(this.sortFlights);
-		this.setState({
-			data : myArr,
-			filteredData : filterArr,
-		})
-	}
 
 	dataSearch(text) {
 		const filteredData = this.state.data.filter( item => {
@@ -99,10 +75,6 @@ class App extends Component {
 				<Cards missions={filteredData}  
 					   moreDetails={flightNumber => this.moreDetails(flightNumber)} 
 				/>
-				<button className="sort" 
-						onClick={ () => this.sort()}>
-						Sort
-				</button>
 				{more && <Preview flightNumber={flight_number}
 								  launchYear={launch_year}
 								  missionName={mission_name}
